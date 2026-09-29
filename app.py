@@ -1041,7 +1041,7 @@ elif page == "🔮 Loan Prediction":
         else:
             st.success(
                 "No specific improvement area was identified "
-                "from these three factors."
+                
             )
         
 
