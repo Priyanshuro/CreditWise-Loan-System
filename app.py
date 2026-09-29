@@ -1038,6 +1038,11 @@ elif page == "🔮 Loan Prediction":
         if suggestions:
             for suggestion in suggestions:
                 st.info(suggestion)
+        else:
+            st.success(
+                "No specific improvement area was identified "
+                "from these three factors."
+            )
         
 
                                                            
