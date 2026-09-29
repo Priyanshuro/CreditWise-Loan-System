@@ -56,6 +56,7 @@ st.markdown(
     .approved {
         padding: 25px;
         border-radius: 15px;
+        color:black;
         background-color: #dcfce7;
         border-left: 6px solid #16a34a;
     }
@@ -63,6 +64,7 @@ st.markdown(
     .rejected {
         padding: 25px;
         border-radius: 15px;
+        color:black;
         background-color: #fee2e2;
         border-left: 6px solid #dc2626;
     }
@@ -1008,6 +1010,35 @@ elif page == "🔮 Loan Prediction":
                 """,
                 unsafe_allow_html=True
             )
+            st.markdown("---")
+            st.subheader("Possible area to Imporve ")
+            approve_data=df_original[
+                df_original["Loan_Approved"].astype(str).str.strip().eq("Yes")
+            ].copy()
+            suggestions=[]
+            if not approve_data.empty:
+                credit_score_median=approve_data["Credit_Score"].median()
+                if(credit_score<credit_score_median):
+                    suggestions.append(
+                        f"Your credit_score {credit_score} is less than credit_score_median {credit_score_median}.\n\n"
+                        f"To Get an Loan you much increase your credit_Score "
+                    )
+            applicant_income_median=approve_data["Applicant_Income"].median()
+            if(applicant_income<applicant_income_median):
+                suggestions.append(
+                    f"Your Income {applicant_income} is less than Application_income_median {applicant_income_median}\n\n"
+                    f"To Get the Loan you much increase your Income"
+                )
+            dti_ratio_median=approve_data["DTI_Ratio"].median()
+            if(dti_ratio>dti_ratio_median):
+                suggestions.append(
+                    f"Your Dead-to-Income ratio {dti_ratio} is greater than Dead-to-Income ratio {dti_ratio_median}\n\n"
+                    f"To Get the Loan you much decrease you Dead-to-Income ratio"
+                )
+            if suggestions:
+                for suggestion in suggestions:
+                    st.info(suggestion)
+        
 
                                                            
                      
